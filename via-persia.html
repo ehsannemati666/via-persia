@@ -13,33 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700;900&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="tailwind.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
-
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        saffron:    '#E8951F',
-        saffronDark:'#C47A10',
-        cream:      '#F8F3EA',
-        espresso:   '#0F0A05',
-        mocha:      '#1E1007',
-        charcoal:   '#161009',
-        gold:       '#C9A84C',
-        rust:       '#C25B2A',
-        sand:       '#E8D9C0',
-      },
-      fontFamily: {
-        serif: ['"Playfair Display"','Georgia','serif'],
-        sans:  ['Lato','sans-serif'],
-        farsi: ['Amiri','serif'],
-      },
-    }
-  }
-}
-</script>
 
 <style>
 *, *::before, *::after { box-sizing:border-box; }
@@ -496,7 +471,7 @@ img { max-width:100%; height:auto; }
       <div class="dish-card rounded-2xl overflow-hidden" style="background:#1A1107;" data-aos="fade-up" data-aos-delay="0">
         <div class="relative overflow-hidden" style="height:200px;">
           <img src="1.jpg"
-               alt="Celo Kubide" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+               alt="Celo Kubide" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
         </div>
         <div class="p-5">
           <h3 class="font-serif text-lg font-bold text-white mb-1">Celo Kubide</h3>
@@ -512,7 +487,7 @@ img { max-width:100%; height:auto; }
       <div class="dish-card rounded-2xl overflow-hidden" style="background:#1A1107;" data-aos="fade-up" data-aos-delay="80">
         <div class="relative overflow-hidden" style="height:200px;">
           <img src="2.png"
-               alt="Ghormeh Sabzi" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+               alt="Ghormeh Sabzi" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
         </div>
         <div class="p-5">
           <h3 class="font-serif text-lg font-bold text-white mb-1">Ghormeh Sabzi</h3>
@@ -528,7 +503,7 @@ img { max-width:100%; height:auto; }
       <div class="dish-card rounded-2xl overflow-hidden" style="background:#1A1107;" data-aos="fade-up" data-aos-delay="160">
         <div class="relative overflow-hidden" style="height:200px;">
           <img src="3.jpeg"
-               alt="Zereshk Polo" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+               alt="Zereshk Polo" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
         </div>
         <div class="p-5">
           <h3 class="font-serif text-lg font-bold text-white mb-1">Zereshk Polo</h3>
@@ -544,7 +519,7 @@ img { max-width:100%; height:auto; }
       <div class="dish-card rounded-2xl overflow-hidden" style="background:#1A1107;" data-aos="fade-up" data-aos-delay="240">
         <div class="relative overflow-hidden" style="height:200px;">
           <img src="4.jpeg"
-               alt="Kashk o Bademjan" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+               alt="Kashk o Bademjan" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
         </div>
         <div class="p-5">
           <h3 class="font-serif text-lg font-bold text-white mb-1">Kashk o Bademjan</h3>
@@ -652,7 +627,7 @@ img { max-width:100%; height:auto; }
       <!-- Large hero — spans 2 rows -->
       <div class="gallery-item relative rounded-2xl" style="grid-row:span 2;"
            @click="openLightbox('gallery_1.jpg')">
-        <img src="gallery_1.jpg" alt="Piatto persiano tradizionale" class="rounded-2xl w-full h-full object-cover">
+        <img src="gallery_1.jpg" alt="Piatto persiano tradizionale" class="rounded-2xl w-full h-full object-cover" loading="lazy">
         <div class="goverlay rounded-2xl">
           <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
         </div>
@@ -661,7 +636,7 @@ img { max-width:100%; height:auto; }
       <!-- Top right -->
       <div class="gallery-item relative rounded-2xl"
            @click="openLightbox('gallery_2.jpg')">
-        <img src="gallery_2.jpg" alt="Khoresh persiano" class="rounded-2xl w-full h-full object-cover">
+        <img src="gallery_2.jpg" alt="Khoresh persiano" class="rounded-2xl w-full h-full object-cover" loading="lazy">
         <div class="goverlay rounded-2xl">
           <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
         </div>
@@ -670,7 +645,7 @@ img { max-width:100%; height:auto; }
       <!-- Bottom right -->
       <div class="gallery-item relative rounded-2xl"
            @click="openLightbox('gallery_3.jpg')">
-        <img src="gallery_3.jpg" alt="Kubide con riso" class="rounded-2xl w-full h-full object-cover">
+        <img src="gallery_3.jpg" alt="Kubide con riso" class="rounded-2xl w-full h-full object-cover" loading="lazy">
         <div class="goverlay rounded-2xl">
           <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
         </div>
@@ -683,7 +658,7 @@ img { max-width:100%; height:auto; }
 
       <div class="gallery-item relative rounded-2xl" style="height:260px;"
            @click="openLightbox('gallery_4.jpg')">
-        <img src="gallery_4.jpg" alt="Piatto di carne persiano" class="rounded-2xl w-full h-full object-cover">
+        <img src="gallery_4.jpg" alt="Piatto di carne persiano" class="rounded-2xl w-full h-full object-cover" loading="lazy">
         <div class="goverlay rounded-2xl">
           <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
         </div>
@@ -691,7 +666,7 @@ img { max-width:100%; height:auto; }
 
       <div class="gallery-item relative rounded-2xl" style="height:260px;"
            @click="openLightbox('gallery_5.jpg')">
-        <img src="gallery_5.jpg" alt="Kofteh persiano" class="rounded-2xl w-full h-full object-cover">
+        <img src="gallery_5.jpg" alt="Kofteh persiano" class="rounded-2xl w-full h-full object-cover" loading="lazy">
         <div class="goverlay rounded-2xl">
           <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
         </div>
@@ -994,10 +969,27 @@ img { max-width:100%; height:auto; }
     var navbar  = document.getElementById('navbar');
     if (!section || !video || !canvas) return;
 
-    var ctx  = canvas.getContext('2d', { alpha: false });
-    var FRAMES = 120;
+    // ── Activate video for mobile (iOS/Android block currentTime seeking
+    //    until play() has been called at least once) ──────────────────────
+    function activateVideo() {
+      var p = video.play();
+      if (p && p.then) {
+        p.then(function () {
+          video.pause();
+          video.currentTime = 0;
+        }).catch(function () {});
+      }
+    }
+    if (video.readyState >= 2) {
+      activateVideo();
+    } else {
+      video.addEventListener('canplay', activateVideo, { once: true });
+    }
+
+    var ctx    = canvas.getContext('2d', { alpha: false });
+    var FRAMES = 40;          // was 120 — 3× faster extraction
     var bitmaps = [];
-    var bmReady = false;
+    var bmCount = 0;          // frames extracted so far (progressive)
     var srcW = 1, srcH = 1;
 
     function fitCanvas() {
@@ -1005,7 +997,6 @@ img { max-width:100%; height:auto; }
       canvas.height = canvas.offsetHeight || window.innerHeight;
     }
     fitCanvas();
-
     window.addEventListener('resize', fitCanvas, { passive: true });
 
     function drawCover(src, sw, sh) {
@@ -1016,26 +1007,27 @@ img { max-width:100%; height:auto; }
     }
 
     function drawBitmap(p) {
+      if (bmCount === 0) return;
       var i  = Math.round(p * (FRAMES - 1));
-      var bm = bitmaps[Math.max(0, Math.min(FRAMES - 1, i))];
-      if (bm) drawCover(bm, srcW, srcH);
+      i = Math.max(0, Math.min(FRAMES - 1, i));
+      // Walk back to nearest loaded frame (frames load 0→FRAMES-1)
+      while (i > 0 && !bitmaps[i]) i--;
+      if (bitmaps[i]) drawCover(bitmaps[i], srcW, srcH);
     }
 
-    // Phase 1: seeked-chain on the visible video
-    var targetTime = 0, seeking = false;
-    video.addEventListener('seeked', function () {
-      seeking = false;
-      if (Math.abs(video.currentTime - targetTime) > 0.033) {
-        seeking = true;
-        video.currentTime = targetTime;
+    // Phase 1: simple direct seek while canvas is not ready yet
+    function seekVideo(p) {
+      if (video.readyState >= 2 && video.duration > 0) {
+        video.currentTime = p * video.duration;
       }
-    });
+    }
 
-    // Phase 2: silent background extraction via a second video element
+    // Phase 2: extract frames in background — switch to canvas after FIRST frame
     async function extractInBackground() {
       var ev = document.createElement('video');
-      ev.src = 'animation new.mp4'; ev.muted = true; ev.preload = 'auto';
-      ev.style.display = 'none';
+      ev.src = video.currentSrc || 'animation new.mp4';
+      ev.muted = true; ev.preload = 'auto';
+      ev.style.cssText = 'position:fixed;opacity:0;pointer-events:none;width:1px;height:1px;top:-9999px';
       document.body.appendChild(ev);
 
       await new Promise(function (res) {
@@ -1053,20 +1045,22 @@ img { max-width:100%; height:auto; }
           ev.addEventListener('seeked', res, { once: true });
         });
         bitmaps[i] = await createImageBitmap(ev);
-      }
+        bmCount++;
 
+        // Progressive: switch to canvas as soon as the first frame is ready
+        if (bmCount === 1) {
+          canvas.style.display = 'block';
+          video.style.display  = 'none';
+          drawBitmap(getProgress());
+        }
+      }
       ev.remove();
-      bmReady = true;
-      canvas.style.display = 'block';
-      video.style.display  = 'none';
-      drawBitmap(getProgress());
     }
 
-    setTimeout(function () {
-      extractInBackground().catch(function (e) {
-        console.warn('Background extraction failed — staying on video mode:', e);
-      });
-    }, 800);
+    // Start immediately — no artificial delay
+    extractInBackground().catch(function (e) {
+      console.warn('Frame extraction failed, staying on video mode:', e);
+    });
 
     function getProgress() {
       var total = section.offsetHeight - window.innerHeight;
@@ -1079,7 +1073,7 @@ img { max-width:100%; height:auto; }
       var alpha = p > 0.78 ? Math.min(1, (p - 0.78) / 0.22) : 0;
       if (textBg)  textBg.style.opacity  = alpha;
       if (content) {
-        content.style.opacity      = alpha;
+        content.style.opacity       = alpha;
         content.style.pointerEvents = alpha > 0.4 ? 'auto' : 'none';
       }
       if (navbar) {
@@ -1094,13 +1088,10 @@ img { max-width:100%; height:auto; }
       rafId = requestAnimationFrame(function () {
         rafId = null;
         var p = getProgress();
-        if (bmReady) {
+        if (bmCount > 0) {
           drawBitmap(p);
         } else {
-          if (video.duration > 0) {
-            targetTime = p * video.duration;
-            if (!seeking) { seeking = true; video.currentTime = targetTime; }
-          }
+          seekVideo(p);
         }
         updateUI(p);
       });
@@ -1132,6 +1123,7 @@ img { max-width:100%; height:auto; }
         img.src = IMAGES[origIdx];
         img.alt = 'Interno Via Persia ' + (origIdx + 1);
         img.draggable = false;
+        img.loading = 'lazy';
         card.appendChild(img);
         container.insertBefore(card, container.firstChild);
       });
