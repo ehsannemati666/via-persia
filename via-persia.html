@@ -361,7 +361,7 @@ img { max-width:100%; height:auto; }
 <div id="hero-scroll" style="position:relative; height:300vh;">
   <div id="hero-sticky" style="position:sticky; top:0; height:100vh; overflow:hidden; background:#0F0A05;">
 
-    <video id="hero-video" src="animation new.mp4" muted playsinline preload="auto"
+    <video id="hero-video" src="animation new.mp4" muted playsinline autoplay preload="auto"
            style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; will-change:transform;">
     </video>
     <canvas id="hero-canvas" style="position:absolute; inset:0; width:100%; height:100%; display:none;"></canvas>
@@ -969,27 +969,18 @@ img { max-width:100%; height:auto; }
     var navbar  = document.getElementById('navbar');
     if (!section || !video || !canvas) return;
 
-    // ── Activate video for mobile (iOS/Android block currentTime seeking
-    //    until play() has been called at least once) ──────────────────────
-    function activateVideo() {
-      var p = video.play();
-      if (p && p.then) {
-        p.then(function () {
-          video.pause();
-          video.currentTime = 0;
-        }).catch(function () {});
-      }
-    }
-    if (video.readyState >= 2) {
-      activateVideo();
-    } else {
-      video.addEventListener('canplay', activateVideo, { once: true });
-    }
+    // iOS: autoplay attr triggers loading; pause on first play so we can seek
+    var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    video.addEventListener('play', function onFirstPlay() {
+      video.removeEventListener('play', onFirstPlay);
+      video.pause();
+      video.currentTime = 0;
+    });
 
     var ctx    = canvas.getContext('2d', { alpha: false });
-    var FRAMES = 40;          // was 120 — 3× faster extraction
+    var FRAMES = 40;
     var bitmaps = [];
-    var bmCount = 0;          // frames extracted so far (progressive)
+    var bmCount = 0;
     var srcW = 1, srcH = 1;
 
     function fitCanvas() {
@@ -1022,12 +1013,14 @@ img { max-width:100%; height:auto; }
       }
     }
 
-    // Phase 2: extract frames in background — switch to canvas after FIRST frame
+    // Extract frames in background — switch to canvas after FIRST frame
+    // On iOS, skip extraction and rely on direct video seeking instead
     async function extractInBackground() {
       var ev = document.createElement('video');
       ev.src = video.currentSrc || 'animation new.mp4';
-      ev.muted = true; ev.preload = 'auto';
-      ev.style.cssText = 'position:fixed;opacity:0;pointer-events:none;width:1px;height:1px;top:-9999px';
+      ev.muted = true; ev.playsInline = true; ev.preload = 'auto';
+      // Must be at least slightly visible for iOS to render frames
+      ev.style.cssText = 'position:fixed;left:-200vw;top:0;width:2px;height:2px;opacity:0.01;pointer-events:none;';
       document.body.appendChild(ev);
 
       await new Promise(function (res) {
@@ -1035,32 +1028,42 @@ img { max-width:100%; height:auto; }
         ev.addEventListener('loadedmetadata', res, { once: true });
       });
 
+      // Activate seeking on the extraction video too
+      try { await ev.play(); ev.pause(); } catch(e) {}
+
       srcW = ev.videoWidth  || canvas.width;
       srcH = ev.videoHeight || canvas.height;
       var dur = ev.duration;
+
+      // Temp canvas for drawImage → createImageBitmap (more compatible than bitmap from video)
+      var fc = document.createElement('canvas');
+      fc.width = srcW; fc.height = srcH;
+      var fctx = fc.getContext('2d');
 
       for (var i = 0; i < FRAMES; i++) {
         ev.currentTime = (i / (FRAMES - 1)) * dur;
         await new Promise(function (res) {
           ev.addEventListener('seeked', res, { once: true });
         });
-        bitmaps[i] = await createImageBitmap(ev);
+        fctx.drawImage(ev, 0, 0, srcW, srcH);
+        bitmaps[i] = await createImageBitmap(fc);
         bmCount++;
 
-        // Progressive: switch to canvas as soon as the first frame is ready
         if (bmCount === 1) {
           canvas.style.display = 'block';
           video.style.display  = 'none';
           drawBitmap(getProgress());
         }
       }
+      fc.width = fc.height = 1;
       ev.remove();
     }
 
-    // Start immediately — no artificial delay
-    extractInBackground().catch(function (e) {
-      console.warn('Frame extraction failed, staying on video mode:', e);
-    });
+    if (!isIOS) {
+      extractInBackground().catch(function (e) {
+        console.warn('Frame extraction failed, staying on video mode:', e);
+      });
+    }
 
     function getProgress() {
       var total = section.offsetHeight - window.innerHeight;
